@@ -1,0 +1,66 @@
+package com.ravan.security
+
+import android.app.Activity
+import android.os.Bundle
+import android.graphics.Color
+import android.view.Gravity
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Button
+
+class MainActivity : Activity() {
+
+    private val green = Color.rgb(0, 255, 100)
+    private val black = Color.rgb(5, 8, 5)
+
+    private lateinit var status: TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+            setPadding(24, 24, 24, 24)
+            setBackgroundColor(black)
+        }
+
+        val title = TextView(this).apply {
+            text = "☠ RAVAN SECURITY ☠"
+            textSize = 27f
+            setTextColor(Color.RED)
+            gravity = Gravity.CENTER
+        }
+
+        status = TextView(this).apply {
+            text = "\n🛡️ PROTECTION STATUS\n\nSetup required"
+            textSize = 19f
+            setTextColor(green)
+            gravity = Gravity.CENTER
+        }
+
+        val info = TextView(this).apply {
+            text = "\nSpam Call Protection\n\n" +
+                   "Android call-screening setup is required.\n"
+            textSize = 16f
+            setTextColor(Color.WHITE)
+            gravity = Gravity.CENTER
+        }
+
+        val button = Button(this).apply {
+            text = "CHECK PROTECTION SETUP"
+            setOnClickListener {
+                status.text =
+                    "🛡️ SETUP REQUIRED\n\n" +
+                    "This screen does not block calls yet."
+            }
+        }
+
+        layout.addView(title)
+        layout.addView(status)
+        layout.addView(info)
+        layout.addView(button)
+
+        setContentView(layout)
+    }
+}
